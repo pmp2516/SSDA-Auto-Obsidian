@@ -20,11 +20,10 @@ FILL_TEMPLATE_USER = """\
 """
 
 EXTRACT_OCR_SYSTEM = """\
-You are an OCR post-processing assistant. The user will give you raw text
-extracted from a handwritten image. Your task is to return a JSON object with:
-  "text"  : cleaned full text (string)
-  "todos" : list of action items / to-dos found in the text (list of strings)
-  "tags"  : 3-7 short keywords that best describe the content (list of strings)
+You are a Layout analysis and OCR assistant. The user will give you an image of a handwritten note that can contain scribbles and tables. Your task is to return a list of JSON objects with:
+  "bbox"  : list of 4 ints [x0, y0, w, h] corresponding to top left corner of text or image bounding box and width and height of the bounding box
+  "ocr"  : cleaned full text contained within the region reported in "bbox", empty string if the region contains no text
+  "type" : 1 if region only contains text, 0 if the region contains a scribble, image, plot, etc.
 
 Return ONLY valid JSON. No markdown, no explanation.
 """
