@@ -91,7 +91,7 @@ def _retrieve_template(extracted: dict, retrieval: RetrievalSystem) -> dict:
     """
     return asdict(retrieval.retrieve_template(extracted['OCR']))
 
-def _retrieve_candidates(extracted: dict, retrieval: RetrievalSystem) -> list[tuple[int, int, list[dict]]]:
+def _retrieve_candidates(extracted: dict, retrieval: RetrievalSystem) -> list[tuple[int, int, dict | None]]:
     spans = [
         (
             matches[i].start(),
@@ -184,7 +184,6 @@ def _pick_folder(note_tags: list[str], histograms: dict[Path, dict[str, int]], v
 
     # Fall back to vault root when no folder has any matching tag
     return best_folder if best_score > 0 else vault_path
-
 
 def _write_note(content: str, vault_path: Path) -> None:
     """Write the rendered note into the vault.
