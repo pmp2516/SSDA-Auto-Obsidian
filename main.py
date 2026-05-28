@@ -80,7 +80,7 @@ def _retrieve_template(extracted: dict, retrieval: RetrievalSystem) -> dict:
     """
     return asdict(retrieval.retrieve_template(extracted['OCR']))
 
-def _retrieve_candidates(extracted: dict, retrieval: RetrievalSystem) -> list[tuple[int, int, list[dict]]]:
+def _retrieve_candidates(extracted: dict, retrieval: RetrievalSystem) -> list[tuple[int, int, dict | None]]:
     spans = [
         (
             matches[i].start(),

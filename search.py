@@ -135,21 +135,21 @@ class MarkdownLinkIndex:
         index_dir = Path(index_dir)
 
         index = pt.terrier.TerrierIndex(str(index_dir))
-        indexer = index.indexer(meta={"docno": 32})
+        indexer = index.indexer(meta={"docno": 32, "title": 256, "path": 512})
 
         indexer.index([
             {
                 "docno": note.id,
                 "text": note.body,
-                "title": note.title,
+                "title": note.title[:256],
                 "aliases": " ".join(note.aliases),
                 "headings": "\n".join(note.headings),
-                "path": str(note.path),
+                "path": str(note.path)[:512],
             }
             for note in notes
         ])
 
-        searcher = index.retriever('BM25') % 1
+        searcher = pt.terrier.Retriever(index, wmodel="BM25", metadata=["title", "path", "docno"]) % 1
 
         return cls(searcher)
 
@@ -162,18 +162,20 @@ class MarkdownLinkIndex:
             f'{field}:("{text}")^{boost}' for field, boost in cls.FIELD_BOOSTS.items()
         )
 
-    def search_span(
-        self,
-        text: str,
-    ) -> list[dict]:
+    def search_span(self, text: str) -> dict | None:
         hits = self.searcher.search(text)
 
-        results = []
+        if len(hits) == 0:
+            return None
 
-        for hit in hits.iterrows():
-            results.append(hit)
+        top = hits.iloc[0]
 
-        return results
+        return {
+            "docno": top["docno"],
+            "title": top.get("title"),
+            "path": top.get("path"),
+            "score": top.get("score"),
+        }
 
 
 class RetrievalSystem:
@@ -211,7 +213,7 @@ class RetrievalSystem:
     def propose_links(
         self,
         spans: Iterable[tuple[int, int, str]],
-    ) -> list[tuple[int, int, list[dict]]]:
+    ) -> list[tuple[int, int, dict | None]]:
         return [
             (
                 *span[:2],
