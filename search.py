@@ -230,15 +230,15 @@ class RetrievalSystem:
 
     def propose_links(
         self,
-        spans: Iterable[str],
+        spans: Iterable[tuple[int, int, str]],
         *,
         top_k: int = 3,
-    ) -> list[tuple[str, list[dict]]]:
+    ) -> list[tuple[int, int, list[dict]]]:
         return [
             (
-                span,
+                *span[:2],
                 self.link_index.search_span(
-                    span,
+                    span[2],
                     k=top_k,
                 ),
             )

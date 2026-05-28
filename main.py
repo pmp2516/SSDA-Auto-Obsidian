@@ -76,12 +76,12 @@ def _retrieve_template(extracted: dict, retrieval: RetrievalSystem) -> dict:
     """
     return asdict(retrieval.retrieve_template(extracted['OCR']))
 
-def _retrieve_candidates(extracted: dict, retrieval: RetrievalSystem) -> list[dict]:
-    spans = []
+def _retrieve_candidates(extracted: dict, retrieval: RetrievalSystem) -> list[tuple[int, int, list[dict]]]:
+    spans = [] # TODO get text spans from the `dict["OCR"]` somehow
     return retrieval.propose_links(spans)
 
 
-def _render_note(extracted: dict, template: dict, link_candidates: dict) -> str:
+def _render_note(extracted: dict, template: dict, link_candidates: list) -> str:
     """Merge OCR output into the template to produce the final note markdown.
 
     Args:
