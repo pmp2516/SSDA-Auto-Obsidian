@@ -3,6 +3,7 @@ from dataclasses import asdict
 import click
 from pathlib import Path
 from search import RetrievalSystem
+from chunk import get_all_notes, get_all_templates
 
 
 @click.group()
@@ -14,7 +15,7 @@ def cli():
 @cli.command("add-note")
 @click.option("--input", "input_path", required=True, type=click.Path(exists=True), help="Path to the input image.")
 @click.option("--vault", required=True, type=click.Path(), help="Path to the Obsidian vault.")
-@click.option("--index-path", required=True, type=click.Path(), help="Path to the index.")
+@click.option("--index-path", "index", required=True, type=click.Path(), help="Path to the index.")
 def add_note(input_path: str, vault: str, index: str):
     """Process a handwritten image and write a new note into the vault."""
     image_path = Path(input_path)
@@ -26,10 +27,11 @@ def add_note(input_path: str, vault: str, index: str):
     click.echo(f"Processing image: {image_path}")
 
     extracted = _run_ocr(image_path)
+    # extracted = { "OCR": "The quick brown fox jumps over the lazy dog." }
     click.echo("OCR complete.")
 
     template = _retrieve_template(extracted, retrieval)
-    click.echo(f"Matched template: {template['name']}")
+    click.echo(f"Matched template: {template['path']}")
 
     link_candidates = _retrieve_candidates(extracted, retrieval)
 
@@ -41,7 +43,7 @@ def add_note(input_path: str, vault: str, index: str):
 
 @cli.command("update-index")
 @click.option("--vault", required=True, type=click.Path(exists=True), help="Path to the Obsidian vault.")
-@click.option("--index-path", required=True, type=click.Path(), help="Path to the index.")
+@click.option("--index-path", "index", required=True, type=click.Path(), help="Path to the index.")
 def update_index(vault: str, index: str):
     """Scan the vault and rebuild the index."""
     vault_path = Path(vault)
@@ -72,8 +74,9 @@ def _retrieve_template(extracted: dict, retrieval: RetrievalSystem) -> dict:
         extracted: output of _run_ocr
 
     Returns a dict with at least:
-        name     (str) — template identifier
+        id       (str) — template identifier
         content  (str) — raw template markdown
+        path     (Path) — path to the template
     """
     return asdict(retrieval.retrieve_template(extracted['OCR']))
 
@@ -100,6 +103,10 @@ def _render_note(extracted: dict, template: dict, link_candidates: list) -> str:
 
     Returns the complete note as a markdown string.
     """
+    # import json
+    # print(json.dumps(
+    #     {"extracted": extracted, "template": template, "link_candidates": link_candidates},
+    #                  indent=2, default=str))
     # TODO: use a templating engine (e.g. Jinja2) or simple string substitution
     #       or even some small model prompting to merge extracted text into the template content,
     #       to fill in {{text}}, {{todos}}, {{date}}, etc.
@@ -121,10 +128,8 @@ def _write_note(content: str, vault_path: Path) -> None:
 
 
 def _rebuild_index(vault_path: Path, index_path: Path) -> RetrievalSystem:
-    # TODO: walk vault_path for *.md files, embed each with a chosen model,
-    #       upsert into a Qdrant collection keyed by file path hash
-    templates = []
-    docs = []
+    templates = get_all_templates(vault_path)
+    docs = get_all_notes(vault_path)
     return RetrievalSystem.build(templates, docs, index_dir=index_path)
 
 

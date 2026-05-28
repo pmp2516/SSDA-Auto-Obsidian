@@ -3,8 +3,6 @@ from uuid import uuid4
 
 from pathlib import Path
 
-from isort import file
-
 from search import MarkdownNote, Template
 
 
