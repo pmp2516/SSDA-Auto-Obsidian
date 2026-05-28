@@ -1,0 +1,311 @@
+{
+  "dataset": "handwritten_note_ocr_linewise_ground_truth",
+  "version": "1.0",
+  "normalization_notes": [
+    "Checked boxes are represented as ☑.",
+    "Empty boxes are represented as ☐.",
+    "Arrows are represented as →.",
+    "Decorative section markers from handwriting are preserved where meaningful as ☐ ☐ around headings.",
+    "Line order follows top-to-bottom reading order within each image."
+  ],
+  "images": [
+    {
+      "image_id": "sprint_standup",
+      "filename": "sprint_standup.png",
+      "title": "Q3 Launch — Sprint 8 Standup",
+      "lines": [
+        {
+          "line_id": 1,
+          "text": "Q3 Launch — Sprint 8 Standup"
+        },
+        {
+          "line_id": 2,
+          "text": "Project: Meridian v2.0 | Owner: Elena Vasquez"
+        },
+        {
+          "line_id": 3,
+          "text": "Attendees: Elena V. · Tom R. · Sarah K. · Priya N. · Luca F."
+        },
+        {
+          "line_id": 4,
+          "text": "#project#meridian#q3-2026#sprint-8"
+        },
+        {
+          "line_id": 5,
+          "text": "☐ ☐ Status Update ☐ ☐"
+        },
+        {
+          "line_id": 6,
+          "text": "· Async collab (Tom R.):"
+        },
+        {
+          "line_id": 7,
+          "text": "BE PR merged. Websocket edge case fixed. On track for sprint 8."
+        },
+        {
+          "line_id": 8,
+          "text": "· AI suggestion engine:"
+        },
+        {
+          "line_id": 9,
+          "text": "Precision@5 = 0.71 ☐ | Latency p95 = 380ms ☐ (budget: 400ms)"
+        },
+        {
+          "line_id": 10,
+          "text": "· Settings redesign (Sarah K.):"
+        },
+        {
+          "line_id": 11,
+          "text": "Figma handoff done. Accessibility audit booked June 2."
+        },
+        {
+          "line_id": 12,
+          "text": "· Onboarding copy:"
+        },
+        {
+          "line_id": 13,
+          "text": "Waiting on copy draft (due May 30). Ref: narrative arc framework."
+        },
+        {
+          "line_id": 14,
+          "text": "☐ ☐ Decisions ☐ ☐"
+        },
+        {
+          "line_id": 15,
+          "text": "☑ API rate-limit decoupled from launch critical path (Tom confirmed ☐)"
+        },
+        {
+          "line_id": 16,
+          "text": "☑ Feature freeze confirmed: June 6"
+        },
+        {
+          "line_id": 17,
+          "text": "☐ Demo video script ☐ assign to me, due June 10"
+        },
+        {
+          "line_id": 18,
+          "text": "☐ Onboarding copy draft ☐ me, due May 30"
+        },
+        {
+          "line_id": 19,
+          "text": "☐ ☐ People / Follow-ups ☐ ☐"
+        },
+        {
+          "line_id": 20,
+          "text": "☐ Priya Nair: tone issue ☐ 'workspace' vs 'vault' for new users ☐ flag to Sarah"
+        },
+        {
+          "line_id": 21,
+          "text": "☐ Luca Ferretti: precision plateau caught early via Metabase ☐ brief Tom"
+        },
+        {
+          "line_id": 22,
+          "text": "☐ Denise Park: exec deck ≤ 5 slides for launch brief (Slack msg 15:00)"
+        },
+        {
+          "line_id": 23,
+          "text": "☐ Tom Reyes: sprint 9 scope doc due May 23 ☐ follow up by EOD"
+        },
+        {
+          "line_id": 24,
+          "text": "☐ Sarah Kim: Brightwave visuals coordination ☐ confirm by June 3"
+        },
+        {
+          "line_id": 25,
+          "text": "☐ ☐ Risks ☐ ☐"
+        },
+        {
+          "line_id": 26,
+          "text": "! API rate-limit slip (sprint 8→9) — mitigated by decoupling"
+        },
+        {
+          "line_id": 27,
+          "text": "! Onboarding copy dependency: UX research results needed by June 1"
+        },
+        {
+          "line_id": 28,
+          "text": "? Enterprise tier research flagged by Denise ☐ Q3 side project"
+        },
+        {
+          "line_id": 29,
+          "text": "☐ ☐ Next Steps ☐ ☐"
+        },
+        {
+          "line_id": 30,
+          "text": "☐ Onboarding copy sections 1–4 (me) ☐ May 30"
+        },
+        {
+          "line_id": 31,
+          "text": "☐ Sprint 9 scope review with Tom ☐ May 23"
+        },
+        {
+          "line_id": 32,
+          "text": "☐ Exec deck for Denise (Minto Pyramid, ≤ 5 slides) ☐ June 1"
+        },
+        {
+          "line_id": 33,
+          "text": "☐ Demo video script draft ☐ June 10"
+        },
+        {
+          "line_id": 34,
+          "text": "☐ Enterprise tier research brief ☐ June 3"
+        }
+      ],
+      "header_metadata_lines": [
+        {
+          "line_id": "h1",
+          "text": "27 May 2026"
+        },
+        {
+          "line_id": "h2",
+          "text": "p. 1"
+        }
+      ]
+    },
+    {
+      "image_id": "zettelkasten_perm0054",
+      "filename": "zettelkasten_perm0054.png",
+      "title": "Noise vs Bias — perm-0054",
+      "lines": [
+        {
+          "line_id": 1,
+          "text": "Noise vs Bias — perm-0054"
+        },
+        {
+          "line_id": 2,
+          "text": "Source: Kahneman, Sibony & Sunstein — Noise (2021) | lit-2026-050"
+        },
+        {
+          "line_id": 3,
+          "text": "Spawned from: lit-2026-041 (availability heuristic) Date read: 18 May 2026"
+        },
+        {
+          "line_id": 4,
+          "text": "#permanent#cognition#decision-making#noise"
+        },
+        {
+          "line_id": 5,
+          "text": "☐ ☐ Core Idea ☐ ☐"
+        },
+        {
+          "line_id": 6,
+          "text": "Bias = systematic directional error. Noise = random scatter in judgment."
+        },
+        {
+          "line_id": 7,
+          "text": "Both degrade decision quality — but orgs only fix bias. Noise is ignored"
+        },
+        {
+          "line_id": 8,
+          "text": "because it implies everyone's judgment is unreliable, not just one person's."
+        },
+        {
+          "line_id": 9,
+          "text": "Key distinction:"
+        },
+        {
+          "line_id": 10,
+          "text": "Bias: judges consistently sentence minorities more harshly (directional)"
+        },
+        {
+          "line_id": 11,
+          "text": "Noise: two judges give radically different sentences to same case (random)"
+        },
+        {
+          "line_id": 12,
+          "text": "☐ Noise is harder to see because it has no story, no villain, no direction."
+        },
+        {
+          "line_id": 13,
+          "text": "☐ ☐ Why it matters (for Meridian launch) ☐ ☐"
+        },
+        {
+          "line_id": 14,
+          "text": "PRD reviews at Apex = bias audit only (motivated reasoning, HIPPO effect)."
+        },
+        {
+          "line_id": 15,
+          "text": "We never measure variability across reviewers ☐ noise never detected."
+        },
+        {
+          "line_id": 16,
+          "text": "Proposal: calibration session before Q3 launch go/no-go decision."
+        },
+        {
+          "line_id": 17,
+          "text": "☐ 5 reviewers, same criteria, independent scoring, then compare."
+        },
+        {
+          "line_id": 18,
+          "text": "☐ Variance = noise level. Discuss to make implicit criteria explicit."
+        },
+        {
+          "line_id": 19,
+          "text": "☐ ☐ Connections ☐ ☐"
+        },
+        {
+          "line_id": 20,
+          "text": "☐ perm-0047: availability ≠ probability — bias family member"
+        },
+        {
+          "line_id": 21,
+          "text": "☐ perm-0049: base-rate neglect — another bias; noise is the complement"
+        },
+        {
+          "line_id": 22,
+          "text": "☐ perm-0055: decision hygiene — the practical response to this insight"
+        },
+        {
+          "line_id": 23,
+          "text": "☐ lit-2026-041: Kahneman TF&S — Ch.12 (parent conceptual family)"
+        },
+        {
+          "line_id": 24,
+          "text": "☐ MOC-Cognition: index note — cognition & decision-making map"
+        },
+        {
+          "line_id": 25,
+          "text": "☐ ☐ Application & Open Questions ☐ ☐"
+        },
+        {
+          "line_id": 26,
+          "text": "Apply: propose calibration session for Elena V. team pre-launch review"
+        },
+        {
+          "line_id": 27,
+          "text": "Apply: noise audit framing for APM hiring panel (4 reviewers, same rubric)"
+        },
+        {
+          "line_id": 28,
+          "text": "Q: Can we quantify current noise level in our existing PRD review data?"
+        },
+        {
+          "line_id": 29,
+          "text": "Q: Does structured scoring (1–5 per criterion) reduce noise sufficiently?"
+        },
+        {
+          "line_id": 30,
+          "text": "☐ ☐ Obsidian Links ☐ ☐"
+        },
+        {
+          "line_id": 31,
+          "text": "\"Noise has no story. No villain, no direction. That's why it survives.\""
+        },
+        {
+          "line_id": 32,
+          "text": "— paraphrase, Kahneman et al. 2021"
+        }
+      ],
+      "header_metadata_lines": [
+        {
+          "line_id": "h1",
+          "text": "23 May 2026"
+        },
+        {
+          "line_id": "h2",
+          "text": "Zettelkasten"
+        }
+      ]
+    }
+  ]
+}

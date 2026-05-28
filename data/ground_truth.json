@@ -1,0 +1,316 @@
+[
+  {
+    "image": "sprint_standup.png",
+    "title": "Q3 Launch — Sprint 8 Standup",
+    "metadata": {
+      "date": "27 May 2026",
+      "page": "p. 1",
+      "project": "Meridian v2.0",
+      "owner": "Elena Vasquez",
+      "attendees": [
+        "Elena V.",
+        "Tom R.",
+        "Sarah K.",
+        "Priya N.",
+        "Luca F."
+      ],
+      "tags": [
+        "project",
+        "meridian",
+        "q3-2026",
+        "sprint-8"
+      ]
+    },
+    "raw_text_lines": [
+      "Q3 Launch — Sprint 8 Standup",
+      "27 May 2026",
+      "p. 1",
+      "Project: Meridian v2.0 | Owner: Elena Vasquez",
+      "Attendees: Elena V. · Tom R. · Sarah K. · Priya N. · Luca F.",
+      "#project#meridian#q3-2026#sprint-8",
+      "Status Update",
+      "• Async collab (Tom R.):",
+      "  BE PR merged. Websocket edge case fixed. On track for sprint 8.",
+      "• AI suggestion engine:",
+      "  Precision@5 = 0.71 ✓ | Latency P95 = 380ms ✓ (budget: 400ms)",
+      "• Settings redesign (Sarah K.):",
+      "  Figma handoff done. Accessibility audit booked June 2.",
+      "• Onboarding copy:",
+      "  Waiting on copy draft (due May 30). Ref: narrative arc framework.",
+      "Decisions",
+      "☑ API rate-limit decoupled from launch critical path (Tom confirmed ✓)",
+      "☑ Feature freeze confirmed: June 6",
+      "☐ Demo video script → assign to me, due June 10",
+      "☐ Onboarding copy draft → me, due May 30",
+      "People / Follow-ups",
+      "☐ Priya Nair: tone issue → 'workspace' vs 'vault' for new users → flag to Sarah",
+      "☐ Luca Ferretti: precision plateau caught early via Metabase → brief Tom",
+      "☐ Denise Park: exec deck ≤ 5 slides for launch brief (Slack msg 15:00)",
+      "☐ Tom Reyes: sprint 9 scope doc due May 23 → follow up by EOD",
+      "☐ Sarah Kim: Brightwave visuals coordination → confirm by June 3",
+      "Risks",
+      "! API rate-limit slip (sprint 8→9) — mitigated by decoupling",
+      "! Onboarding copy dependency: UX research results needed by June 1",
+      "? Enterprise tier research flagged by Denise → Q3 side project",
+      "Next Steps",
+      "☐ Onboarding copy sections 1–4 (me) | due May 30",
+      "☐ Sprint 9 scope review with Tom | due May 23",
+      "☐ Exec deck for Denise (Minto Pyramid, ≤ 5 slides) | due June 1",
+      "☐ Demo video script draft | due June 10",
+      "☐ Enterprise tier research brief | due June 3"
+    ],
+    "sections": [
+      {
+        "heading": "Status Update",
+        "items": [
+          {
+            "label": "Async collab",
+            "owner": "Tom R.",
+            "text": "BE PR merged. Websocket edge case fixed. On track for sprint 8."
+          },
+          {
+            "label": "AI suggestion engine",
+            "metrics": {
+              "Precision@5": "0.71",
+              "Latency P95": "380ms",
+              "budget": "400ms"
+            }
+          },
+          {
+            "label": "Settings redesign",
+            "owner": "Sarah K.",
+            "text": "Figma handoff done. Accessibility audit booked June 2."
+          },
+          {
+            "label": "Onboarding copy",
+            "text": "Waiting on copy draft (due May 30). Ref: narrative arc framework."
+          }
+        ]
+      },
+      {
+        "heading": "Decisions",
+        "items": [
+          {
+            "checked": true,
+            "text": "API rate-limit decoupled from launch critical path",
+            "note": "Tom confirmed"
+          },
+          {
+            "checked": true,
+            "text": "Feature freeze confirmed: June 6"
+          },
+          {
+            "checked": false,
+            "text": "Demo video script",
+            "assignment": "me",
+            "due": "June 10"
+          },
+          {
+            "checked": false,
+            "text": "Onboarding copy draft",
+            "assignment": "me",
+            "due": "May 30"
+          }
+        ]
+      },
+      {
+        "heading": "People / Follow-ups",
+        "items": [
+          {
+            "name": "Priya Nair",
+            "text": "tone issue — 'workspace' vs 'vault' for new users",
+            "action": "flag to Sarah"
+          },
+          {
+            "name": "Luca Ferretti",
+            "text": "precision plateau caught early via Metabase",
+            "action": "brief Tom"
+          },
+          {
+            "name": "Denise Park",
+            "text": "exec deck ≤ 5 slides for launch brief",
+            "note": "Slack msg 15:00"
+          },
+          {
+            "name": "Tom Reyes",
+            "text": "sprint 9 scope doc due May 23",
+            "action": "follow up by EOD"
+          },
+          {
+            "name": "Sarah Kim",
+            "text": "Brightwave visuals coordination",
+            "action": "confirm by June 3"
+          }
+        ]
+      },
+      {
+        "heading": "Risks",
+        "items": [
+          {
+            "level": "!",
+            "text": "API rate-limit slip (sprint 8→9) — mitigated by decoupling"
+          },
+          {
+            "level": "!",
+            "text": "Onboarding copy dependency: UX research results needed by June 1"
+          },
+          {
+            "level": "?",
+            "text": "Enterprise tier research flagged by Denise → Q3 side project"
+          }
+        ]
+      },
+      {
+        "heading": "Next Steps",
+        "items": [
+          {
+            "checked": false,
+            "text": "Onboarding copy sections 1–4",
+            "owner": "me",
+            "due": "May 30"
+          },
+          {
+            "checked": false,
+            "text": "Sprint 9 scope review with Tom",
+            "due": "May 23"
+          },
+          {
+            "checked": false,
+            "text": "Exec deck for Denise",
+            "note": "Minto Pyramid, ≤ 5 slides",
+            "due": "June 1"
+          },
+          {
+            "checked": false,
+            "text": "Demo video script draft",
+            "due": "June 10"
+          },
+          {
+            "checked": false,
+            "text": "Enterprise tier research brief",
+            "due": "June 3"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "image": "zettelkasten_perm0054.png",
+    "title": "Noise vs Bias — perm-0054",
+    "metadata": {
+      "date": "23 May 2026",
+      "type": "Zettelkasten",
+      "source": "Kahneman, Sibony & Sunstein — Noise (2021)",
+      "source_id": "lit-2026-050",
+      "spawned_from": "lit-2026-041 (availability heuristic)",
+      "date_read": "18 May 2026",
+      "tags": [
+        "permanent",
+        "cognition",
+        "decision-making",
+        "noise"
+      ]
+    },
+    "raw_text_lines": [
+      "Noise vs Bias — perm-0054",
+      "23 May 2026",
+      "Zettelkasten",
+      "Source: Kahneman, Sibony & Sunstein — Noise (2021) | lit-2026-050",
+      "Spawned from: lit-2026-041 (availability heuristic) Date read: 18 May 2026",
+      "#permanent#cognition#decision-making#noise",
+      "Core Idea",
+      "Bias = systematic directional error. Noise = random scatter in judgment.",
+      "Both degrade decision quality — but orgs only fix bias. Noise is ignored",
+      "because it implies everyone's judgment is unreliable, not just one person's.",
+      "Key distinction:",
+      "Bias: judges consistently sentence minorities more harshly (directional)",
+      "Noise: two judges give radically different sentences to same case (random)",
+      "□ Noise is harder to see because it has no story, no villain, no direction.",
+      "Why it matters (for Meridian launch)",
+      "PRD reviews at Apex = bias audit only (motivated reasoning, HIPPO effect).",
+      "We never measure variability across reviewers → noise never detected.",
+      "Proposal: calibration session before Q3 launch go/no-go decision.",
+      "□ 5 reviewers, same criteria, independent scoring, then compare.",
+      "□ Variance = noise level. Discuss to make implicit criteria explicit.",
+      "Connections",
+      "□ perm-0047: availability ≠ probability — bias family member",
+      "□ perm-0049: base-rate neglect — another bias; noise is the complement",
+      "□ perm-0055: decision hygiene — the practical response to this insight",
+      "□ lit-2026-041: Kahneman TF&S — Ch.12 (parent conceptual family)",
+      "□ MOC-Cognition: index note — cognition & decision-making map",
+      "Application & Open Questions",
+      "Apply: propose calibration session for Elena V. team pre-launch review",
+      "Apply: noise audit framing for APM hiring panel (4 reviewers, same rubric)",
+      "Q: Can we quantify current noise level in our existing PRD review data?",
+      "Q: Does structured scoring (1–5 per criterion) reduce noise sufficiently?",
+      "Obsidian Links",
+      "\"Noise has no story. No villain, no direction. That's why it survives.\"",
+      "— paraphrase, Kahneman et al. 2021"
+    ],
+    "sections": [
+      {
+        "heading": "Core Idea",
+        "items": [
+          "Bias = systematic directional error. Noise = random scatter in judgment.",
+          "Both degrade decision quality — but orgs only fix bias. Noise is ignored because it implies everyone's judgment is unreliable, not just one person's."
+        ],
+        "key_distinction": {
+          "Bias": "judges consistently sentence minorities more harshly (directional)",
+          "Noise": "two judges give radically different sentences to same case (random)"
+        },
+        "note": "Noise is harder to see because it has no story, no villain, no direction."
+      },
+      {
+        "heading": "Why it matters (for Meridian launch)",
+        "items": [
+          "PRD reviews at Apex = bias audit only (motivated reasoning, HIPPO effect).",
+          "We never measure variability across reviewers → noise never detected.",
+          "Proposal: calibration session before Q3 launch go/no-go decision.",
+          "5 reviewers, same criteria, independent scoring, then compare.",
+          "Variance = noise level. Discuss to make implicit criteria explicit."
+        ]
+      },
+      {
+        "heading": "Connections",
+        "items": [
+          {
+            "note_id": "perm-0047",
+            "text": "availability ≠ probability — bias family member"
+          },
+          {
+            "note_id": "perm-0049",
+            "text": "base-rate neglect — another bias; noise is the complement"
+          },
+          {
+            "note_id": "perm-0055",
+            "text": "decision hygiene — the practical response to this insight"
+          },
+          {
+            "note_id": "lit-2026-041",
+            "text": "Kahneman TF&S — Ch.12 (parent conceptual family)"
+          },
+          {
+            "note_id": "MOC-Cognition",
+            "text": "index note — cognition & decision-making map"
+          }
+        ]
+      },
+      {
+        "heading": "Application & Open Questions",
+        "applications": [
+          "propose calibration session for Elena V. team pre-launch review",
+          "noise audit framing for APM hiring panel (4 reviewers, same rubric)"
+        ],
+        "questions": [
+          "Can we quantify current noise level in our existing PRD review data?",
+          "Does structured scoring (1–5 per criterion) reduce noise sufficiently?"
+        ]
+      },
+      {
+        "heading": "Obsidian Links",
+        "quote": "Noise has no story. No villain, no direction. That's why it survives.",
+        "attribution": "paraphrase, Kahneman et al. 2021"
+      }
+    ]
+  }
+]

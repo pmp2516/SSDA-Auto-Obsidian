@@ -1,0 +1,47 @@
+[
+	{
+	"bbox": [124,256, 1300,228],
+	"type": 1,
+	"OCR": "Group discussion meeting"
+	},
+	{
+	"bbox": [2360,68, 520,172],
+	"type": 1,
+	"OCR": "27.05.2026"
+	},
+	{
+	"bbox": [308,848, 2536,352],
+	"type": 1,
+	"OCR": "Patrick created a Github repo\nWe distributed all tasks for now and started working"
+	},
+	{
+	"bbox": [248,1252, 2452,428],
+	"type": 1,
+	"OCR": "Read up on Dynamic Retrieval for next step [ ]"
+	},
+	{
+	"bbox": [236,1832, 1032,208],
+	"type": 1,
+	"OCR": "Our system schematic"
+	},
+	{
+	"bbox": [340,2192, 2412,692],
+	"type": 0,
+	"OCR": ""
+	},
+	{
+	"bbox": [280,2560, 408,204],
+	"type": 1,
+	"OCR": "Handwritten\nNote"
+	},
+	{
+	"bbox": [1180,2580, 408,208],
+	"type": 1,
+	"OCR": "Big Magic\nMachine"
+	},
+	{
+	"bbox": [2236,2436, 376,108],
+	"type": 1,
+	"OCR": "Obsidian"
+	}
+]
