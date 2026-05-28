@@ -134,28 +134,23 @@ class MarkdownLinkIndex:
         index_dir: str | Path,
     ) -> Self:
         index_dir = Path(index_dir)
-        if not index_dir.exists():
-            args = [
-                "--storePositions",
-                "--storeDocvectors",
-                "--storeRaw",
-            ]
+        args = []
 
-            indexer = LuceneIndexer(str(index_dir), args)
+        indexer = LuceneIndexer(str(index_dir), args)
 
-            for note in notes:
-                document = {
-                    "id": note.id,
-                    "contents": note.body,
-                    "title": note.title,
-                    "aliases": " ".join(note.aliases),
-                    "headings": "\n".join(note.headings),
-                    "path": str(note.path),
-                }
+        for note in notes:
+            document = {
+                "id": note.id,
+                "contents": note.body,
+                "title": note.title,
+                "aliases": " ".join(note.aliases),
+                "headings": "\n".join(note.headings),
+                "path": str(note.path),
+            }
 
-                indexer.add_doc_dict(document)
+            indexer.add_doc_dict(document)
 
-            indexer.close()
+        indexer.close()
 
         searcher = LuceneSearcher(str(index_dir))
 
