@@ -1,3 +1,4 @@
+import re
 from dataclasses import asdict
 import click
 from pathlib import Path
@@ -77,7 +78,16 @@ def _retrieve_template(extracted: dict, retrieval: RetrievalSystem) -> dict:
     return asdict(retrieval.retrieve_template(extracted['OCR']))
 
 def _retrieve_candidates(extracted: dict, retrieval: RetrievalSystem) -> list[tuple[int, int, list[dict]]]:
-    spans = [] # TODO get text spans from the `dict["OCR"]` somehow
+    spans = [
+        (
+            matches[i].start(),
+            matches[i + n - 1].end(),
+            extracted["OCR"][matches[i].start():matches[i + n - 1].end()],
+        )
+        for matches in [list(re.finditer(r"\w+", extracted["OCR"]))]
+        for n in (1, 2, 3)
+        for i in range(len(matches) - n + 1)
+    ]
     return retrieval.propose_links(spans)
 
 
