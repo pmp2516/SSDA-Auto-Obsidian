@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from typing import Iterable
 from uuid import uuid4
 
@@ -6,24 +5,7 @@ from pathlib import Path
 
 from isort import file
 
-
-@dataclass(frozen=True)
-class Template:
-    id: str
-    content: str
-    path: Path
-
-
-@dataclass(frozen=True)
-class MarkdownNote:
-    id: str
-    path: Path
-
-    title: str
-    aliases: list[str]
-    headings: list[str]
-
-    body: str
+from search import MarkdownNote, Template
 
 
 def chunk_markdown(text, max_chunk_size=1000):
