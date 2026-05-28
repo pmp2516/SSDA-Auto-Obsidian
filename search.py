@@ -5,8 +5,7 @@ from typing import Iterable, Sequence, Self
 import numpy as np
 import torch
 
-from pyserini.index.lucene import LuceneIndexer
-from pyserini.search.lucene import LuceneSearcher
+import pyterrier as pt
 
 from transformers import AutoModel, AutoTokenizer
 
@@ -123,7 +122,7 @@ class MarkdownLinkIndex:
 
     def __init__(
         self,
-        searcher: LuceneSearcher,
+        searcher: pt.terrier.Retriever,
     ):
         self.searcher = searcher
 
@@ -134,27 +133,23 @@ class MarkdownLinkIndex:
         index_dir: str | Path,
     ) -> Self:
         index_dir = Path(index_dir)
-        args = []
 
-        indexer = LuceneIndexer(str(index_dir), args)
+        index = pt.terrier.TerrierIndex(str(index_dir))
+        indexer = index.indexer(meta={"docno": 32})
 
-        for note in notes:
-            document = {
-                "id": note.id,
-                "contents": note.body,
+        indexer.index([
+            {
+                "docno": note.id,
+                "text": note.body,
                 "title": note.title,
                 "aliases": " ".join(note.aliases),
                 "headings": "\n".join(note.headings),
                 "path": str(note.path),
             }
+            for note in notes
+        ])
 
-            indexer.add_doc_dict(document)
-
-        indexer.close()
-
-        searcher = LuceneSearcher(str(index_dir))
-
-        searcher.set_bm25()
+        searcher = index.retriever('BM25') % 1
 
         return cls(searcher)
 
@@ -170,23 +165,13 @@ class MarkdownLinkIndex:
     def search_span(
         self,
         text: str,
-        *,
-        k: int = 5,
     ) -> list[dict]:
-        query = self._build_query(text)
-        hits = self.searcher.search(query, k=k)
+        hits = self.searcher.search(text)
 
         results = []
 
-        for hit in hits:
-            doc = self.searcher.doc(hit.docid)
-            if doc is not None:
-                results.append({
-                    "id": hit.docid,
-                    "score": hit.score,
-                    "raw": doc.raw(),
-                    "path": doc.get("path"),
-                })
+        for hit in hits.iterrows():
+            results.append(hit)
 
         return results
 
@@ -226,15 +211,12 @@ class RetrievalSystem:
     def propose_links(
         self,
         spans: Iterable[tuple[int, int, str]],
-        *,
-        top_k: int = 3,
     ) -> list[tuple[int, int, list[dict]]]:
         return [
             (
                 *span[:2],
                 self.link_index.search_span(
                     span[2],
-                    k=top_k,
                 ),
             )
             for span in spans
