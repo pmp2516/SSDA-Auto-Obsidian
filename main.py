@@ -5,7 +5,7 @@ import click
 from pathlib import Path
 from search import RetrievalSystem
 
-from llm import LLMClient
+from llm import LLMClient, VLLMClient
 
 
 @click.group()
@@ -69,13 +69,11 @@ def _run_ocr(image_path: Path) -> dict:
     """Call the OCR service and return structured extraction results.
 
     Returns a dict with keys:
-        text       (str)  — full transcribed text
-        todos      (list) — extracted to-do items
-        scribbles  (list) — extracted scribble regions
-        tags       (list) — inferred tags / keywords for template matching
+        bbox  (list[int]) - list of 4 ints [x0, y0, w, h] corresponding to top left corner of text or image bounding box and width and height of the bounding box
+        ocr   (str) - cleaned full text contained within the region reported in "bbox", empty string if the region contains no text
+        type  (int) - 1 if region only contains text, 0 if the region contains a scribble, image, plot, etc.
     """
-    # TODO: integrate OCR service (e.g. Google Vision, Tesseract, or custom model)
-    raise NotImplementedError("OCR service not yet implemented")
+    return VLLMClient().extract_ocr(image_path)
 
 
 def _retrieve_template(extracted: dict, retrieval: RetrievalSystem) -> dict:
