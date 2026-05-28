@@ -1,5 +1,7 @@
+from dataclasses import asdict
 import click
 from pathlib import Path
+from search import RetrievalSystem
 
 
 @click.group()
@@ -11,20 +13,26 @@ def cli():
 @cli.command("add-note")
 @click.option("--input", "input_path", required=True, type=click.Path(exists=True), help="Path to the input image.")
 @click.option("--vault", required=True, type=click.Path(), help="Path to the Obsidian vault.")
-def add_note(input_path: str, vault: str):
+@click.option("--index-path", required=True, type=click.Path(), help="Path to the index.")
+def add_note(input_path: str, vault: str, index: str):
     """Process a handwritten image and write a new note into the vault."""
     image_path = Path(input_path)
     vault_path = Path(vault)
+    index_path = Path(index)
+    click.echo(f"Loading or building index at {index_path}")
+    retrieval = _rebuild_index(vault_path, index_path)
 
     click.echo(f"Processing image: {image_path}")
 
     extracted = _run_ocr(image_path)
     click.echo("OCR complete.")
 
-    template = _retrieve_template(extracted)
+    template = _retrieve_template(extracted, retrieval)
     click.echo(f"Matched template: {template['name']}")
 
-    note_content = _render_note(extracted, template)
+    link_candidates = _retrieve_candidates(extracted, retrieval)
+
+    note_content = _render_note(extracted, template, link_candidates)
 
     _write_note(note_content, vault_path)
     click.echo(f"Note written to vault: {vault_path}")
@@ -32,12 +40,13 @@ def add_note(input_path: str, vault: str):
 
 @cli.command("update-index")
 @click.option("--vault", required=True, type=click.Path(exists=True), help="Path to the Obsidian vault.")
-def update_index(vault: str):
-    """Scan the vault and rebuild the Qdrant template index."""
+@click.option("--index-path", required=True, type=click.Path(), help="Path to the index.")
+def update_index(vault: str, index: str):
+    """Scan the vault and rebuild the index."""
     vault_path = Path(vault)
+    index_path = Path(index)
     click.echo(f"Scanning vault: {vault_path}")
-
-    _rebuild_index(vault_path)
+    _rebuild_index(vault_path, index_path)
     click.echo("Index updated.")
 
 
@@ -55,8 +64,8 @@ def _run_ocr(image_path: Path) -> dict:
     raise NotImplementedError("OCR service not yet implemented")
 
 
-def _retrieve_template(extracted: dict) -> dict:
-    """Query Qdrant for the best-matching note template.
+def _retrieve_template(extracted: dict, retrieval: RetrievalSystem) -> dict:
+    """Query for the best-matching note template.
 
     Args:
         extracted: output of _run_ocr
@@ -65,16 +74,14 @@ def _retrieve_template(extracted: dict) -> dict:
         name     (str) — template identifier
         content  (str) — raw template markdown
     """
-    # TODO: embed extracted['tags'] / extracted['text'], query Qdrant collection,
-    #       return the top-1 result payload as the template dict
+    return asdict(retrieval.retrieve_template(extracted['OCR']))
 
-    # TODO: consider which threshold (if any) is appropriate for our demo case
-
-    # TODO: Fallback will be just an empty note, I guess
-    raise NotImplementedError("Template retrieval from Qdrant not yet implemented")
+def _retrieve_candidates(extracted: dict, retrieval: RetrievalSystem) -> list[dict]:
+    spans = []
+    return retrieval.propose_links(spans)
 
 
-def _render_note(extracted: dict, template: dict) -> str:
+def _render_note(extracted: dict, template: dict, link_candidates: dict) -> str:
     """Merge OCR output into the template to produce the final note markdown.
 
     Args:
@@ -103,14 +110,12 @@ def _write_note(content: str, vault_path: Path) -> None:
     raise NotImplementedError("Vault writer not yet implemented")
 
 
-def _rebuild_index(vault_path: Path) -> None:
-    """Scan the vault, embed all templates, and upsert them into Qdrant.
-
-    Should be idempotent — running twice must not create duplicate vectors.
-    """
+def _rebuild_index(vault_path: Path, index_path: Path) -> RetrievalSystem:
     # TODO: walk vault_path for *.md files, embed each with a chosen model,
     #       upsert into a Qdrant collection keyed by file path hash
-    raise NotImplementedError("Index builder not yet implemented")
+    templates = []
+    docs = []
+    return RetrievalSystem.build(templates, docs, index_dir=index_path)
 
 
 if __name__ == "__main__":
