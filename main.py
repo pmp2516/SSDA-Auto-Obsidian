@@ -1,6 +1,8 @@
 import click
 from pathlib import Path
 
+from llm import LLMClient
+
 
 @click.group()
 def cli():
@@ -15,6 +17,7 @@ def add_note(input_path: str, vault: str):
     """Process a handwritten image and write a new note into the vault."""
     image_path = Path(input_path)
     vault_path = Path(vault)
+    client = LLMClient()
 
     click.echo(f"Processing image: {image_path}")
 
@@ -24,10 +27,20 @@ def add_note(input_path: str, vault: str):
     template = _retrieve_template(extracted)
     click.echo(f"Matched template: {template['name']}")
 
-    note_content = _render_note(extracted, template)
+    note_content = _render_note(extracted, template, client)
 
     _write_note(note_content, vault_path)
     click.echo(f"Note written to vault: {vault_path}")
+
+
+@cli.command("fill-template")
+@click.option("--text", required=True, help="Extracted text to fill into the template.")
+@click.option("--template", "template_path", required=True, type=click.Path(exists=True), help="Path to the markdown template file.")
+def fill_template(text: str, template_path: str):
+    """Fill a markdown template with the given text using the LLM."""
+    template_content = Path(template_path).read_text()
+    result = LLMClient().fill_template(text, template_content)
+    click.echo(result)
 
 
 @cli.command("update-index")
@@ -74,19 +87,21 @@ def _retrieve_template(extracted: dict) -> dict:
     raise NotImplementedError("Template retrieval from Qdrant not yet implemented")
 
 
-def _render_note(extracted: dict, template: dict) -> str:
+def _render_note(extracted: dict, template: dict, client: LLMClient) -> str:
     """Merge OCR output into the template to produce the final note markdown.
 
     Args:
-        extracted: output of _run_ocr
-        template:  output of _retrieve_template
+        extracted: output of _run_ocr — expects keys: text, todos, tags
+        template:  output of _retrieve_template — expects key: content
+        client:    shared LLMClient instance
 
     Returns the complete note as a markdown string.
     """
-    # TODO: use a templating engine (e.g. Jinja2) or simple string substitution
-    #       or even some small model prompting to merge extracted text into the template content,
-    #       to fill in {{text}}, {{todos}}, {{date}}, etc.
-    raise NotImplementedError("Note rendering not yet implemented")
+    extracted_text = extracted.get("text", "")
+    if extracted.get("todos"):
+        extracted_text += "\n\nTodos:\n" + "\n".join(f"- {t}" for t in extracted["todos"])
+
+    return client.fill_template(extracted_text, template["content"])
 
 
 def _write_note(content: str, vault_path: Path) -> None:
